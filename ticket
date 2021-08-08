@@ -1,0 +1,162 @@
+package a4_cse1pgx;
+
+import java.io.PrintStream; // Imports print stream //
+import java.text.NumberFormat; // Imports currency number format //
+import java.util.Scanner; // Imports input scanner 
+
+
+public class A4_cse1pgx { //Public singular class //
+    
+    public static void main(String[] args) { // Main program code //
+
+        // List of all variables used in the code as per data dictionary //
+        
+        int childCat = 1; 
+        int adultCat = 2; 
+        int seniorCat =3; 
+        int cat = 0; 
+        double adultPrice = 36.00; 
+        double childPrice = 18.00;
+        double seniorPrice =32.50;
+        int childQty = 0;
+        int adultQty = 0; 
+        int seniorQty = 0;
+        double childSub = 00.00;
+        double adultSub = 00.00;
+        double seniorSub = 00.00; 
+        boolean continueShopping = true; 
+        boolean confirmPurchase = true; 
+        double itemPrice = 0; 
+        
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance (); // Imports the number formatting which changes double values to the correct formatting in currency //
+        
+        { 
+            System.out.println ( "@@@@@ WELCOME TO WINTER WONDERLAND @@@@@"); //Only displays in the first outer loop //
+            
+            do { // Opens the outer do..While loop. Pressing "0" will terminate the program entirely//
+                
+                Scanner scanner = new Scanner (System.in); //Allows the program to get an input from the keyboard /
+                
+                System.out.println (             "MAIN MENU"                   ); //Runs the main menu out print //
+                System.out.println ( "Winter Wonder World has the following ticketing options:"); //Runs the main menu out print //
+                System.out.println ( " 1 = Child (4-17 Years) $18 per ticket"); //Runs the main menu out print //
+                System.out.println ( " 2 = Adult (18-59 Years) $36 per ticket"); //Runs the main menu out print //
+                System.out.println ( " 3 = Senior (60+ Years) $32.50 per ticket"); //Runs the main menu out print //
+                System.out.println ( " Children aged 3 and under are free and do not need a ticket"); //Runs the main menu out print //
+                System.out.println ( " Press 0 to exit"); //Runs the main menu out print. If selected, the outer while..If will terminate the program //
+                
+
+//Area of code programming which collects and stores the desired ticket category from the user //
+
+System.out.println ("Enter your Ticket category");
+
+cat = scanner.nextInt ();
+
+if (cat == (1)) {   //Only displays the message and records the variable if the number entered is 1 == child //
+    itemPrice = childPrice; // Reasiagns the varible itemPrice to childPrice in this category //
+    System.out.println ("You have selected Child");
+
+} else if (cat == (2)) { //Only displays the message and records the variable if the number entered is 2 == adult //
+    itemPrice = adultPrice;// Reassigns the varible itemPrice to childPrice in this category //
+    System.out.println ("You have selected Adult");
+
+}else if ( cat == (3)) {//Only displays the message and records the variable if the number entered is 3 == senior //
+    itemPrice = seniorPrice; // Reasiagns the varible itemPrice to childPrice in this category //
+    System.out.println ("You have selected Senior");
+
+} else { // Exits the program and terminates it //
+    System.out.println ("You have exited the program. Thank-you. ");
+    return;
+}
+// Area of the code program which collects the quantity of tickets the user wishes to purchase in each category //
+// Displays the quantity and price if the corresponding category equals the number collected in the first part of the program //
+
+System.out.println ("Enter the number of tickets for this category:");
+
+if (cat == (1)) { //Only displays the message and records the variable if the category entered is 1 == child //
+    childQty = scanner.nextInt (); // Collects and stores the amount of tickets purchased for the category //
+    childSub = childQty * itemPrice; //Calculates the sub total of the child category //
+    System.out.println ("You are purchasing " + childQty + " child tickets at $18.00 each. "); //Displays the required output depending on the if statement being met //
+
+} else if (cat == (2)) { //Only displays the message and records the variable if the category entered is 2 == adult //
+    adultQty = scanner.nextInt ();// Collects and stores the amount of tickets purchased for the category //
+    adultSub = adultQty * itemPrice;//Calculates the sub total of the adult category //
+    System.out.println ("You are purchasing " + adultQty + " adult tickets at $36.00 each. "); //Displays the required output depending on the if statement being met //
+
+}else if ( cat == (3)) { //Only displays the message and records the variable if the category entered is 3 == senior //
+    seniorQty = scanner.nextInt ();// Collects and stores the amount of tickets purchased for the category //
+    seniorSub = seniorQty * itemPrice;//Calculates the sub total of the senior category //
+    System.out.println ("You are purchasing" + seniorQty + " senior tickets at $32.50 each. "); //Displays the required output depending on the if statement being met //
+}
+
+// Boolean area of program code which asks the user to confirm the purchase. If yes, the total is stored and calculated. If not, the program loops //
+
+System.out.println("Do you wish to confirm purchase? (Y/N)"); 
+String response = scanner.next (); 
+
+if (response.equals ("n")) {
+    confirmPurchase = false; 
+}
+
+// Area of the code program which combines the previously collected variables and displays them on the condition that the user has purchased tickets within the category // 
+
+System.out.println("To summarise, you currently have the following tickets in your basket from each category:"); 
+
+if (1 <=childQty) {
+    
+    System.out.println("Total Amount for " + childQty + " " + "Child" + " tickets:" + currencyFormat.format (childSub) ) ;
+
+} if (adultQty >1) {
+    
+    System.out.println("Total Amount for " + adultQty + " " + "Adult" + " tickets: " + currencyFormat.format (adultSub) ) ;
+
+} if (seniorQty >1) {
+    
+    System.out.println("Total Amount for " + seniorQty + " " + "Senior" + " tickets: " + currencyFormat.format (seniorSub) ) ;
+
+}
+
+// Area of the code which confirms if the user would like to purchase tickets from another category using a boolean conditional .//
+//If yes, the program will loop back again to the main menu while displaying the running total of tickets purchased //
+// If no, the program will run to the end and display the final purchases. //
+
+System.out.println("Do you wish to purchase tickets from another category? (Y/N)"); 
+
+String cont = scanner.next ();       
+if (cont.equals ("n")) {
+    continueShopping = false; 
+}
+// This area of the programming code displays the running total of the purchased tickets in the user basket using conditional if statements //
+
+if (childQty > 1) {
+    System.out.println("You currently have : " + childQty + "" + ("X") + " Child " + "tickets");
+
+} if (adultQty >1) {
+    System.out.println("You currently have: " + adultQty + "" + ("X") + " Adult " + "tickets");
+
+}if (seniorQty >1) {
+    System.out.println("You currently have: " + seniorQty + "" + ("X") + " Senior " + "tickets");
+
+}
+            
+            } while (continueShopping); // Concludes the Do...while loop //
+// Final area of the program which concludes and displays the purchases in each ticket category only if they have been purchased //
+//Displays a final grand total of all of ticket amounts combined //
+
+System.out.println ("You have purchased:"); 
+        
+        }
+        if (childQty > 1) {
+            System.out.println(+ childQty + " Child tickets at $18.00 each totaling: " + currencyFormat.format (childSub));
+        } if (adultQty >1) {
+            System.out.println(+ adultQty + " Adult tickets at $36.00 each totaling: " + currencyFormat.format (adultSub));
+        } if (seniorQty >1) {
+            System.out.println(+ seniorQty + " Senior tickets at $32.50 each totaling: " + currencyFormat.format (seniorSub));
+        }
+        
+        double grandTotal = childSub + adultSub + seniorSub; // Calculates the grand total of all the tickets depending on which tickets have been purchased in a category //
+        System.out.println ("Total Overall cost:" + currencyFormat.format (grandTotal) ); 
+        
+        System.exit (0);// Ends the program if 0 is entered into the main menu or the end of program is reached //
+}
+}
